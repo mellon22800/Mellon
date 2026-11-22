@@ -6,6 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GRADLE_USER_HOME: ${{ runner.temp }}/dynax-gradle-${{ github.run_id }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,9 +23,6 @@ jobs:
         with:
           gradle-version: 8.2
           cache-disabled: true
-
-      - name: Clear Gradle JAR cache
-        run: rm -rf ~/.gradle/caches/jars-9
 
       - name: Extract project
         run: unzip -o DynamicIsland.jpg -d proj
